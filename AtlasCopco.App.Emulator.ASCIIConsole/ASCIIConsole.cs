@@ -1,30 +1,24 @@
-﻿using System;
-using System.Text;
-using AtlasCopco.App.Emulator.Model;
-using AtlasCopco.Integration.Maze;
-
-namespace AtlasCopco.App.Emulator.Console
+﻿namespace AtlasCopco.App.Emulator.Console
 {
-	public class ASCIIConsole : IEmulator
+	public class ASCIIConsole : Integration.Maze.IEmulator
 	{
-		private readonly IMazeIntegration _mazeGenerator;
-
-		public ASCIIConsole(IMazeIntegration mazeGenerator)
-		{
-			_mazeGenerator = mazeGenerator;
-		}
-
 		public ASCIIConsole()
 		{
 		}
 
-		#region IEmulator Implementation
+		public ASCIIConsole(Integration.Maze.IMazeIntegration mazeGenerator)
+		{
+			_mazeGenerator = mazeGenerator;
+		}
 
+		private readonly Integration.Maze.IMazeIntegration _mazeGenerator;
+
+		#region IEmulator Implementation
 		public void EmulateMain()
 		{
 			Initialize();
 
-			var hunter = new Hunter
+			var hunter = new Model.Hunter
 			{
 				HealthPoint = 2, //TODO Read from config
 				StepsCount = 0,
@@ -41,14 +35,16 @@ namespace AtlasCopco.App.Emulator.Console
 
 				switch (menuChoice)
 				{
-					case ConsoleKey.D1:
+					case System.ConsoleKey.D1:
 						NewGame();
 						StartNavigation(hunter);
 						break;
-					case ConsoleKey.D2:
+
+					case System.ConsoleKey.D2:
 						NewGame(true);
 						StartNavigation(hunter);
 						break;
+
 					default:
 						System.Console.WriteLine("Not a valid choice!");
 						continue;
@@ -61,7 +57,7 @@ namespace AtlasCopco.App.Emulator.Console
 		public void Initialize()
 		{
 			System.Console.Clear();
-			System.Console.OutputEncoding = Encoding.GetEncoding(866);
+			System.Console.OutputEncoding = System.Text.Encoding.GetEncoding(866);
 			System.Console.SetCursorPosition((System.Console.WindowWidth) / 2, System.Console.CursorTop);
 			System.Console.WriteLine("┌─────────────────────────┐");
 
@@ -86,7 +82,7 @@ namespace AtlasCopco.App.Emulator.Console
 			System.Console.WriteLine("2. Challenge me! (Creates a random maze with size from 2:10)");
 		}
 
-		public MazeResult StartNavigation(Hunter hunter)
+		public Model.MazeResult StartNavigation(Model.Hunter hunter)
 		{
 			var entranceRoomId = -1;
 
@@ -97,21 +93,20 @@ namespace AtlasCopco.App.Emulator.Console
 			{
 				entranceRoomId = _mazeGenerator.GetEntranceRoom();
 			}
-			catch (Exception e)
+			catch (System.Exception e)
 			{
 				System.Console.WriteLine("Maze metadata is wrong, no entrance room was found!");
 				//TODO log e using NLog or whatever
 				System.Console.ReadLine();
-				Environment.Exit(0);
+				System.Environment.Exit(0);
 			}
-
 
 			System.Console.WriteLine("Initialize entrance room....");
 
 			return EmulateMaze(hunter, entranceRoomId);
 		}
 
-		public MazeResult EmulateMaze(Hunter hunter, int roomId)
+		public Model.MazeResult EmulateMaze(Model.Hunter hunter, int roomId)
 		{
 			while (true)
 			{
@@ -123,7 +118,7 @@ namespace AtlasCopco.App.Emulator.Console
 				if (_mazeGenerator.HasTreasure(roomId))
 				{
 					Celebrate(hunter);
-					return MazeResult.TreasureFound;
+					return Model.MazeResult.TreasureFound;
 				}
 
 				// Check if room has a trap
@@ -132,7 +127,7 @@ namespace AtlasCopco.App.Emulator.Console
 					if (hunter.HealthPoint <= 1)
 					{
 						OfferCondelonces(hunter);
-						return MazeResult.HunterDied;
+						return Model.MazeResult.HunterDied;
 					}
 
 					System.Console.WriteLine("Oj! You have been injured..");
@@ -154,7 +149,7 @@ namespace AtlasCopco.App.Emulator.Console
 				var menuChoice = System.Console.ReadKey(true).Key;
 				switch (menuChoice)
 				{
-					case ConsoleKey.UpArrow:
+					case System.ConsoleKey.UpArrow:
 						if (roomProperties.CanGoNorth)
 						{
 							System.Console.WriteLine("Going North!");
@@ -165,7 +160,8 @@ namespace AtlasCopco.App.Emulator.Console
 							System.Console.WriteLine("No Way! The treasure is important, come on!");
 						}
 						continue;
-					case ConsoleKey.DownArrow:
+
+					case System.ConsoleKey.DownArrow:
 						if (roomProperties.CanGoSouth)
 						{
 							System.Console.WriteLine("Going South!");
@@ -176,7 +172,8 @@ namespace AtlasCopco.App.Emulator.Console
 							System.Console.WriteLine("No Way! The treasure is important, come on!");
 						}
 						continue;
-					case ConsoleKey.LeftArrow:
+
+					case System.ConsoleKey.LeftArrow:
 						if (roomProperties.CanGoWest)
 						{
 							System.Console.WriteLine("Going West!");
@@ -187,7 +184,8 @@ namespace AtlasCopco.App.Emulator.Console
 							System.Console.WriteLine("No Way! The treasure is important, come on!");
 						}
 						continue;
-					case ConsoleKey.RightArrow:
+
+					case System.ConsoleKey.RightArrow:
 						if (roomProperties.CanGoEast)
 						{
 							System.Console.WriteLine("Going East!");
@@ -198,6 +196,7 @@ namespace AtlasCopco.App.Emulator.Console
 							System.Console.WriteLine("No Way! The treasure is important, come on!");
 						}
 						continue;
+
 					default:
 						System.Console.WriteLine("Invalid direction. The treasure is important, come on!");
 						continue;
@@ -205,7 +204,7 @@ namespace AtlasCopco.App.Emulator.Console
 			}
 		}
 
-		public void Celebrate(Hunter hunter)
+		public void Celebrate(Model.Hunter hunter)
 		{
 			System.Console.Clear();
 			System.Console.WriteLine("Congratulations {0}!", hunter.Name);
@@ -214,7 +213,7 @@ namespace AtlasCopco.App.Emulator.Console
 			PlayRandomMusic();
 		}
 
-		public void OfferCondelonces(Hunter hunter)
+		public void OfferCondelonces(Model.Hunter hunter)
 		{
 			System.Console.Clear();
 			System.Console.WriteLine("{0}, you are Doooooooooooooooooooooooooooomed!", hunter.Name);
@@ -232,20 +231,20 @@ namespace AtlasCopco.App.Emulator.Console
 				System.Console.WriteLine();
 				System.Console.WriteLine();
 			}
-			catch (Exception e)
+			catch (System.Exception e)
 			{
 				System.Console.WriteLine("Maze metadata is wrong, room description wasn't found!");
 				//TODO log e using NLog or whatever
 				System.Console.ReadLine();
-				Environment.Exit(0);
+				System.Environment.Exit(0);
 			}
 		}
 
-		public void DisplayHunterStatus(Hunter hunter)
+		public void DisplayHunterStatus(Model.Hunter hunter)
 		{
 			if (hunter == null)
 			{
-				throw new ArgumentNullException(nameof(hunter));
+				throw new System.ArgumentNullException(nameof(hunter));
 			}
 
 			System.Console.WriteLine("Player:{0}     HP:{1}      Steps:{2}", hunter.Name, hunter.HealthPoint, hunter.StepsCount);
@@ -277,7 +276,6 @@ namespace AtlasCopco.App.Emulator.Console
 					System.Console.WriteLine("Enjoy the random maze size as a prize..");
 					mazeSize = GetRandomMazeSize();
 				}
-
 			}
 
 			// Build Maze
@@ -287,23 +285,21 @@ namespace AtlasCopco.App.Emulator.Console
 				_mazeGenerator.BuildMaze(mazeSize);
 				System.Console.WriteLine("Maze generation succeeded!");
 			}
-			catch (Exception e)
+			catch (System.Exception e)
 			{
 				System.Console.WriteLine("Maze generation failed, check log file for details");
 				//TODO log e using NLog or whatever
 				System.Console.ReadLine();
-				Environment.Exit(0);
+				System.Environment.Exit(0);
 			}
 		}
-
 		#endregion
 
 		#region Private helper methods
-
 		private static int GetRandomMazeSize()
 		{
 			System.Console.WriteLine("Generating Random maze size..");
-			var mazeSizeGenerator = new Random();
+			var mazeSizeGenerator = new System.Random();
 			var size = mazeSizeGenerator.Next(2, 10);
 			System.Console.WriteLine("Random maze size {0} is generated", size);
 
@@ -312,16 +308,16 @@ namespace AtlasCopco.App.Emulator.Console
 
 		private static void PlayRandomMusic()
 		{
-			var randomSounds = new Random();
+			var randomSounds = new System.Random();
 			for (var index = 0; index < 50; index++)
 			{
 				System.Console.Beep(randomSounds.Next(1000) + 100, 100);
 			}
 		}
 
-		private RoomProperties GetRoomProperties(int roomId)
+		private Model.RoomProperties GetRoomProperties(int roomId)
 		{
-			var roomProperties = new RoomProperties
+			var roomProperties = new Model.RoomProperties
 			{
 				NorthRoom = _mazeGenerator.GetRoom(roomId, 'N'),
 				SouthRoom = _mazeGenerator.GetRoom(roomId, 'S'),

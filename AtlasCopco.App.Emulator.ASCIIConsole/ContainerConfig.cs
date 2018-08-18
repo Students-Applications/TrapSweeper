@@ -1,44 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using Autofac;
 using System.Linq;
-using System.Reflection;
-using AtlasCopco.Integration.Maze;
-using Autofac;
 
 namespace AtlasCopco.App.Emulator.Console
 {
-    internal static class ContainerConfig
-    {
-        public static IContainer Configure()
-        {
-            var builder = new ContainerBuilder();
+	internal static class ContainerConfig
+	{
+		static ContainerConfig()
+		{
+		}
 
-            // Make sure process paths are sane...
-            Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
+		public static Autofac.IContainer Configure()
+		{
+			var builder =
+				new Autofac.ContainerBuilder();
 
-            //  begin setup of autofac >>
+			// Make sure process paths are sane...
+			System.IO.Directory.SetCurrentDirectory(System.AppDomain.CurrentDomain.BaseDirectory);
 
-            // 1. Scan for assemblies containing dlls that implement IMazeIntegration in the bin folder
-            var assemblies = new List<Assembly>();
-            assemblies.AddRange(
-                Directory.EnumerateFiles(Directory.GetCurrentDirectory(), "*.dll", SearchOption.AllDirectories)
-                    .Select(Assembly.LoadFrom)
-            );
+			//  begin setup of autofac >>
 
-            //TODO
-            // Fix to handle multiple implementations/Load one implementation
-            foreach (var assembly in assemblies)
-            {
-                builder.RegisterAssemblyTypes(assembly)
-                    .Where(t => t.GetInterfaces()
-                        .Any(i => i.IsAssignableFrom(typeof(IMazeIntegration))))
-                    .AsImplementedInterfaces()
-                    .InstancePerRequest();
-            }
-            builder.RegisterType<ASCIIConsole>().As<IEmulator>();
+			// 1. Scan for assemblies containing dlls that implement IMazeIntegration in the bin folder
+			var assemblies =
+				new System.Collections.Generic.List<System.Reflection.Assembly>();
 
-            return builder.Build();
-        }
-    }
+			assemblies.AddRange(
+				System.IO.Directory.EnumerateFiles
+				(System.IO.Directory.GetCurrentDirectory(), "*.dll", System.IO.SearchOption.AllDirectories)
+				.Select(System.Reflection.Assembly.LoadFrom)
+			);
+
+			//TODO
+			// Fix to handle multiple implementations/Load one implementation
+			foreach (var assembly in assemblies)
+			{
+				builder.RegisterAssemblyTypes(assembly)
+					.Where(t => t.GetInterfaces()
+						.Any(i => i.IsAssignableFrom(typeof(Integration.Maze.IMazeIntegration))))
+					.AsImplementedInterfaces()
+					.InstancePerRequest();
+			}
+
+			builder.RegisterType<ASCIIConsole>().As<Integration.Maze.IEmulator>();
+
+			return (builder.Build());
+		}
+	}
 }
