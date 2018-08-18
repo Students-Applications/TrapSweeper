@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtlasCopco.Integration.Maze
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtlasCopco.App.Emulator.Model", "AtlasCopco.App.Emulator.Model\AtlasCopco.App.Emulator.Model.csproj", "{189B9A0D-1FC4-4F2B-A55C-D40004DEAD37}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SahelMazeGame", "SahelMazeGame\SahelMazeGame.csproj", "{65F13BAA-3E5C-46EF-A7D8-187AF2441FE1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{189B9A0D-1FC4-4F2B-A55C-D40004DEAD37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{189B9A0D-1FC4-4F2B-A55C-D40004DEAD37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{189B9A0D-1FC4-4F2B-A55C-D40004DEAD37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65F13BAA-3E5C-46EF-A7D8-187AF2441FE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65F13BAA-3E5C-46EF-A7D8-187AF2441FE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65F13BAA-3E5C-46EF-A7D8-187AF2441FE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65F13BAA-3E5C-46EF-A7D8-187AF2441FE1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
