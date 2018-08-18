@@ -18,7 +18,8 @@
 		int GetEntranceRoom();
 
 		/// <summary>
-		/// Gets the room adjacent to the passed room, given a direction. NULL signals invalid room, i.e. edge of the maze.
+		/// Gets the room adjacent to the passed room, given a direction. NULL signals invalid room,
+		/// i.e. edge of the maze.
 		/// </summary>
 		/// <param name="roomId">ID of the originating room.</param>
 		/// <param name="direction">N, S, W or E.</param>

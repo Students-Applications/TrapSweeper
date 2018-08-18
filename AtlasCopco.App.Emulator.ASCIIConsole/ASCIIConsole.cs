@@ -20,34 +20,40 @@
 
 			var hunter = new Model.Hunter
 			{
-				HealthPoint = 2, //TODO Read from config
 				StepsCount = 0,
-				Name = "X" //TODO Get from input somewhere
+				HealthPoint = ApplicationSettings.HealthPoint,
 			};
 
-			while (!System.Console.KeyAvailable)
+			while (System.Console.KeyAvailable == false)
 			{
 				// Load dll dynamically
 				// Temporarily use a dummy object to draw the skeleton
 				// IMazeIntegration mazeGenerator;
 
-				var menuChoice = System.Console.ReadKey(true).Key;
+				var menuChoice =
+					System.Console.ReadKey(true).Key;
 
 				switch (menuChoice)
 				{
 					case System.ConsoleKey.D1:
+					{
 						NewGame();
 						StartNavigation(hunter);
 						break;
+					}
 
 					case System.ConsoleKey.D2:
+					{
 						NewGame(true);
 						StartNavigation(hunter);
 						break;
+					}
 
 					default:
+					{
 						System.Console.WriteLine("Not a valid choice!");
 						continue;
+					}
 				}
 
 				ShowMenu();
@@ -57,6 +63,7 @@
 		public void Initialize()
 		{
 			System.Console.Clear();
+
 			System.Console.OutputEncoding = System.Text.Encoding.GetEncoding(866);
 			System.Console.SetCursorPosition((System.Console.WindowWidth) / 2, System.Console.CursorTop);
 			System.Console.WriteLine("┌─────────────────────────┐");
@@ -72,6 +79,7 @@
 			System.Console.WriteLine("Edit configuration file to adjust dll Path and some other nice stuff");
 			System.Console.WriteLine("You can close the emulator by pressing (Escape) at any time");
 			System.Console.WriteLine();
+
 			ShowMenu();
 		}
 
@@ -93,10 +101,13 @@
 			{
 				entranceRoomId = _mazeGenerator.GetEntranceRoom();
 			}
-			catch (System.Exception e)
+			catch (System.Exception ex)
 			{
 				System.Console.WriteLine("Maze metadata is wrong, no entrance room was found!");
+				System.Console.WriteLine(ex.Message);
+
 				//TODO log e using NLog or whatever
+
 				System.Console.ReadLine();
 				System.Environment.Exit(0);
 			}
@@ -132,6 +143,7 @@
 
 					System.Console.WriteLine("Oj! You have been injured..");
 					System.Console.WriteLine("You suffered a loss of 1 HP");
+
 					hunter.HealthPoint--;
 				}
 
@@ -146,10 +158,14 @@
 				// Allow hunter to move
 				//TODO Refactor this?
 				System.Console.WriteLine("Choose your destiny..");
-				var menuChoice = System.Console.ReadKey(true).Key;
+
+				var menuChoice =
+					System.Console.ReadKey(true).Key;
+
 				switch (menuChoice)
 				{
 					case System.ConsoleKey.UpArrow:
+					{
 						if (roomProperties.CanGoNorth)
 						{
 							System.Console.WriteLine("Going North!");
@@ -160,8 +176,10 @@
 							System.Console.WriteLine("No Way! The treasure is important, come on!");
 						}
 						continue;
+					}
 
 					case System.ConsoleKey.DownArrow:
+					{
 						if (roomProperties.CanGoSouth)
 						{
 							System.Console.WriteLine("Going South!");
@@ -172,8 +190,10 @@
 							System.Console.WriteLine("No Way! The treasure is important, come on!");
 						}
 						continue;
+					}
 
 					case System.ConsoleKey.LeftArrow:
+					{
 						if (roomProperties.CanGoWest)
 						{
 							System.Console.WriteLine("Going West!");
@@ -184,8 +204,10 @@
 							System.Console.WriteLine("No Way! The treasure is important, come on!");
 						}
 						continue;
+					}
 
 					case System.ConsoleKey.RightArrow:
+					{
 						if (roomProperties.CanGoEast)
 						{
 							System.Console.WriteLine("Going East!");
@@ -196,10 +218,13 @@
 							System.Console.WriteLine("No Way! The treasure is important, come on!");
 						}
 						continue;
+					}
 
 					default:
+					{
 						System.Console.WriteLine("Invalid direction. The treasure is important, come on!");
 						continue;
+					}
 				}
 			}
 		}
@@ -207,7 +232,7 @@
 		public void Celebrate(Model.Hunter hunter)
 		{
 			System.Console.Clear();
-			System.Console.WriteLine("Congratulations {0}!", hunter.Name);
+			System.Console.WriteLine("Congratulations {0}!");
 			System.Console.WriteLine("You made it to the treasure with {0} steps and {1} health points and proved you are a lucky person..", hunter.StepsCount, hunter.HealthPoint);
 			System.Console.WriteLine();
 			PlayRandomMusic();
@@ -216,7 +241,7 @@
 		public void OfferCondelonces(Model.Hunter hunter)
 		{
 			System.Console.Clear();
-			System.Console.WriteLine("{0}, you are Doooooooooooooooooooooooooooomed!", hunter.Name);
+			System.Console.WriteLine("{0}, Ooooooooooooops!");
 			System.Console.WriteLine("You stepped on so many traps and didn't find the treasure..");
 			System.Console.WriteLine("Good luck next time!");
 			System.Console.WriteLine();
@@ -226,15 +251,20 @@
 		{
 			try
 			{
-				var roomDescription = _mazeGenerator.GetDescription(roomId);
+				var roomDescription =
+					_mazeGenerator.GetDescription(roomId);
+
 				System.Console.WriteLine("Room is {0}", roomDescription);
 				System.Console.WriteLine();
 				System.Console.WriteLine();
 			}
-			catch (System.Exception e)
+			catch (System.Exception ex)
 			{
 				System.Console.WriteLine("Maze metadata is wrong, room description wasn't found!");
+				System.Console.WriteLine(ex.Message);
+
 				//TODO log e using NLog or whatever
+
 				System.Console.ReadLine();
 				System.Environment.Exit(0);
 			}
@@ -247,7 +277,7 @@
 				throw new System.ArgumentNullException(nameof(hunter));
 			}
 
-			System.Console.WriteLine("Player:{0}     HP:{1}      Steps:{2}", hunter.Name, hunter.HealthPoint, hunter.StepsCount);
+			System.Console.WriteLine("Dear Player:     HP:{0}      Steps:{1}", hunter.HealthPoint, hunter.StepsCount);
 			System.Console.WriteLine();
 			System.Console.WriteLine();
 		}
@@ -261,6 +291,7 @@
 		public void NewGame(bool isRandom = false)
 		{
 			int mazeSize;
+
 			if (isRandom)
 			{
 				mazeSize = GetRandomMazeSize();
@@ -268,12 +299,14 @@
 			else
 			{
 				System.Console.WriteLine("Enter maze size..");
+
 				var strSize = System.Console.ReadLine();
-				if (!int.TryParse(strSize, out mazeSize))
+
+				if (int.TryParse(strSize, out mazeSize) == false)
 				{
 					// :)
 					System.Console.WriteLine("Not a valid value!");
-					System.Console.WriteLine("Enjoy the random maze size as a prize..");
+					System.Console.WriteLine("Enjoy the random maze size as a prize!");
 					mazeSize = GetRandomMazeSize();
 				}
 			}
@@ -285,10 +318,13 @@
 				_mazeGenerator.BuildMaze(mazeSize);
 				System.Console.WriteLine("Maze generation succeeded!");
 			}
-			catch (System.Exception e)
+			catch (System.Exception ex)
 			{
 				System.Console.WriteLine("Maze generation failed, check log file for details");
+				System.Console.WriteLine(ex.Message);
+
 				//TODO log e using NLog or whatever
+
 				System.Console.ReadLine();
 				System.Environment.Exit(0);
 			}
@@ -309,6 +345,7 @@
 		private static void PlayRandomMusic()
 		{
 			var randomSounds = new System.Random();
+
 			for (var index = 0; index < 50; index++)
 			{
 				System.Console.Beep(randomSounds.Next(1000) + 100, 100);
@@ -324,7 +361,8 @@
 				WestRoom = _mazeGenerator.GetRoom(roomId, 'W'),
 				EastRoom = _mazeGenerator.GetRoom(roomId, 'E')
 			};
-			return roomProperties;
+
+			return (roomProperties);
 		}
 		#endregion
 	}
