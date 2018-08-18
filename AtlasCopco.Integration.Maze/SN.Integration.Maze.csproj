@@ -7,8 +7,8 @@
     <ProjectGuid>{C47C3625-C54D-4F16-B53F-7839B10D87BE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AtlasCopco.Integration.Maze</RootNamespace>
-    <AssemblyName>AtlasCopco.Integration.Maze</AssemblyName>
+    <RootNamespace>SN.Integration.Maze</RootNamespace>
+    <AssemblyName>SN.Integration.Maze</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,9 +40,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AtlasCopco.App.Emulator.Model\AtlasCopco.App.Emulator.Model.csproj">
+    <ProjectReference Include="..\AtlasCopco.App.Emulator.Model\SN.App.Emulator.Model.csproj">
       <Project>{189b9a0d-1fc4-4f2b-a55c-d40004dead37}</Project>
-      <Name>AtlasCopco.App.Emulator.Model</Name>
+      <Name>SN.App.Emulator.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

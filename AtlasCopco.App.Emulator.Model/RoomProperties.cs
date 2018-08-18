@@ -1,7 +1,11 @@
-﻿namespace AtlasCopco.App.Emulator.Model
+﻿namespace SN.App.Emulator.Model
 {
-	public class RoomProperties
+	public class RoomProperties : object
 	{
+		public RoomProperties() : base()
+		{
+		}
+
 		public int? WestRoom { get; set; }
 		public int? EastRoom { get; set; }
 		public int? NorthRoom { get; set; }

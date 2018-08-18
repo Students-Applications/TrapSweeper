@@ -1,7 +1,11 @@
-﻿namespace AtlasCopco.App.Emulator.Model
+﻿namespace SN.App.Emulator.Model
 {
-	public class Hunter
+	public class Hunter : object
 	{
+		public Hunter() : base()
+		{
+		}
+
 		public int StepsCount;
 		public int HealthPoint;
 	}

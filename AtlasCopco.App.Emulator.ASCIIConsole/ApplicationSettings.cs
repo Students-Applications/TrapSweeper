@@ -1,4 +1,4 @@
-﻿namespace AtlasCopco.App.Emulator.Console
+﻿namespace SN.App.Emulator.Console
 {
 	internal static class ApplicationSettings
 	{

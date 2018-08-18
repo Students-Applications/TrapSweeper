@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{B3D8A67D-00AB-4293-936A-8753704CDD9F}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>AtlasCopco.App.Emulator.Console</RootNamespace>
-    <AssemblyName>AtlasCopco.App.Emulator.Console</AssemblyName>
+    <RootNamespace>SN.App.Emulator.Console</RootNamespace>
+    <AssemblyName>SN.App.Emulator.Console</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -56,13 +56,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AtlasCopco.App.Emulator.Model\AtlasCopco.App.Emulator.Model.csproj">
+    <ProjectReference Include="..\AtlasCopco.App.Emulator.Model\SN.App.Emulator.Model.csproj">
       <Project>{189b9a0d-1fc4-4f2b-a55c-d40004dead37}</Project>
-      <Name>AtlasCopco.App.Emulator.Model</Name>
+      <Name>SN.App.Emulator.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AtlasCopco.Integration.Maze\AtlasCopco.Integration.Maze.csproj">
+    <ProjectReference Include="..\AtlasCopco.Integration.Maze\SN.Integration.Maze.csproj">
       <Project>{c47c3625-c54d-4f16-b53f-7839b10d87be}</Project>
-      <Name>AtlasCopco.Integration.Maze</Name>
+      <Name>SN.Integration.Maze</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

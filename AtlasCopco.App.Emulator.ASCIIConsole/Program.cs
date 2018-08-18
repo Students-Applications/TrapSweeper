@@ -1,6 +1,6 @@
 ﻿using Autofac;
 
-namespace AtlasCopco.App.Emulator.Console
+namespace SN.App.Emulator.Console
 {
 	internal class Program
 	{

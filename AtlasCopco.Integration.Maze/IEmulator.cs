@@ -1,6 +1,4 @@
-﻿using AtlasCopco.App.Emulator.Model;
-
-namespace AtlasCopco.Integration.Maze
+﻿namespace SN.Integration.Maze
 {
 	/// <summary>
 	/// Standard for any type of Maze emulator
@@ -22,7 +20,7 @@ namespace AtlasCopco.Integration.Maze
 		/// </summary>
 		/// <param name="hunter">Current exploring hunter</param>
 		/// <returns>Enum indicating result</returns>
-		MazeResult StartNavigation(Hunter hunter);
+		App.Emulator.Model.MazeResult StartNavigation(App.Emulator.Model.Hunter hunter);
 
 		/// <summary>
 		/// /// Go in maze rooms until you die, find treasure or keep roaming eternally
@@ -30,18 +28,18 @@ namespace AtlasCopco.Integration.Maze
 		/// <param name="hunter">Current exploring hunter</param>
 		/// <param name="roomId">Current room Id</param>
 		/// <returns>Enum indicating result</returns>
-		MazeResult EmulateMaze(Hunter hunter, int roomId);
+		App.Emulator.Model.MazeResult EmulateMaze(App.Emulator.Model.Hunter hunter, int roomId);
 
 		/// <summary>
 		/// Display some text and play random music, celebrating find the treasure
 		/// </summary>
 		/// <param name="hunter">Current exploring hunter</param>
-		void Celebrate(Hunter hunter);
+		void Celebrate(App.Emulator.Model.Hunter hunter);
 
 		/// <summary>
 		/// Display some text to offer condelonces for hunter death from traps
 		/// </summary>
-		void OfferCondelonces(Hunter hunter);
+		void OfferCondelonces(App.Emulator.Model.Hunter hunter);
 
 		/// <summary>
 		/// Display room information
@@ -53,7 +51,7 @@ namespace AtlasCopco.Integration.Maze
 		/// Display hunter information
 		/// </summary>
 		/// <param name="hunter"></param>
-		void DisplayHunterStatus(Hunter hunter);
+		void DisplayHunterStatus(App.Emulator.Model.Hunter hunter);
 
 		/// <summary>
 		/// Draw square room with signs for available directions

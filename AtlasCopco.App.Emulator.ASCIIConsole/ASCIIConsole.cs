@@ -1,4 +1,4 @@
-﻿namespace AtlasCopco.App.Emulator.Console
+﻿namespace SN.App.Emulator.Console
 {
 	public class ASCIIConsole : Integration.Maze.IEmulator
 	{
@@ -69,7 +69,7 @@
 			System.Console.WriteLine("┌─────────────────────────┐");
 
 			System.Console.SetCursorPosition((System.Console.WindowWidth) / 2, System.Console.CursorTop);
-			System.Console.WriteLine("│Atlas Copco Treasure Hunt│");
+			System.Console.WriteLine("│Ms. Sahel Naghshineh Treasure Hunt│");
 
 			System.Console.SetCursorPosition((System.Console.WindowWidth) / 2, System.Console.CursorTop);
 			System.Console.WriteLine("└─────────────────────────┘");

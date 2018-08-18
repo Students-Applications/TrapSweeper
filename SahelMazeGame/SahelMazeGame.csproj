@@ -38,9 +38,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AtlasCopco.Integration.Maze\AtlasCopco.Integration.Maze.csproj">
+    <ProjectReference Include="..\AtlasCopco.Integration.Maze\SN.Integration.Maze.csproj">
       <Project>{c47c3625-c54d-4f16-b53f-7839b10d87be}</Project>
-      <Name>AtlasCopco.Integration.Maze</Name>
+      <Name>SN.Integration.Maze</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

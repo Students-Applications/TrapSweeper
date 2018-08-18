@@ -1,6 +1,6 @@
 ﻿namespace SahelMazeGame
 {
-	public class MazeIntegration : object, AtlasCopco.Integration.Maze.IMazeIntegration
+	public class MazeIntegration : object, SN.Integration.Maze.IMazeIntegration
 	{
 		public void BuildMaze(int size)
 		{

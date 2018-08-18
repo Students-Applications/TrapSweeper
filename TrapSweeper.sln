@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtlasCopco.App.Emulator.Console", "AtlasCopco.App.Emulator.ASCIIConsole\AtlasCopco.App.Emulator.Console.csproj", "{B3D8A67D-00AB-4293-936A-8753704CDD9F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SN.App.Emulator.Console", "AtlasCopco.App.Emulator.ASCIIConsole\SN.App.Emulator.Console.csproj", "{B3D8A67D-00AB-4293-936A-8753704CDD9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtlasCopco.Integration.Maze", "AtlasCopco.Integration.Maze\AtlasCopco.Integration.Maze.csproj", "{C47C3625-C54D-4F16-B53F-7839B10D87BE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SN.Integration.Maze", "AtlasCopco.Integration.Maze\SN.Integration.Maze.csproj", "{C47C3625-C54D-4F16-B53F-7839B10D87BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtlasCopco.App.Emulator.Model", "AtlasCopco.App.Emulator.Model\AtlasCopco.App.Emulator.Model.csproj", "{189B9A0D-1FC4-4F2B-A55C-D40004DEAD37}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SN.App.Emulator.Model", "AtlasCopco.App.Emulator.Model\SN.App.Emulator.Model.csproj", "{189B9A0D-1FC4-4F2B-A55C-D40004DEAD37}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SahelMazeGame", "SahelMazeGame\SahelMazeGame.csproj", "{65F13BAA-3E5C-46EF-A7D8-187AF2441FE1}"
 EndProject

@@ -1,9 +1,9 @@
-﻿namespace AtlasCopco.App.Emulator.Model
+﻿namespace SN.App.Emulator.Model
 {
-	public enum MazeResult
+	public enum MazeResult : int
 	{
-		TreasureFound,
-		HunterDied,
 		Unknown,
+		HunterDied,
+		TreasureFound,
 	}
 }

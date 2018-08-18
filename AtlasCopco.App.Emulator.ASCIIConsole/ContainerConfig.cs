@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using System.Linq;
 
-namespace AtlasCopco.App.Emulator.Console
+namespace SN.App.Emulator.Console
 {
 	internal static class ContainerConfig
 	{
@@ -48,7 +48,11 @@ namespace AtlasCopco.App.Emulator.Console
 				string pathName =
 					$"{ path }SahelMazeGame.dll";
 
-				if (System.IO.File.Exists(pathName))
+				if (System.IO.File.Exists(pathName) == false)
+				{
+					System.Console.WriteLine("The [SahelMazeGame.dll] Does Not Exist!");
+				}
+				else
 				{
 					System.Reflection.Assembly assembly =
 						System.Reflection.Assembly.LoadFile(path: pathName);
