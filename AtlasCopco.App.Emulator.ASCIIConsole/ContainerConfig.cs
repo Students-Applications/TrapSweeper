@@ -14,30 +14,56 @@ namespace AtlasCopco.App.Emulator.Console
 			var builder =
 				new Autofac.ContainerBuilder();
 
-			// Make sure process paths are sane...
-			System.IO.Directory.SetCurrentDirectory(System.AppDomain.CurrentDomain.BaseDirectory);
+			//// Make sure process paths are sane...
+			//System.IO.Directory.SetCurrentDirectory(System.AppDomain.CurrentDomain.BaseDirectory);
 
-			//  begin setup of autofac >>
+			////  begin setup of autofac >>
 
-			// 1. Scan for assemblies containing dlls that implement IMazeIntegration in the bin folder
-			var assemblies =
-				new System.Collections.Generic.List<System.Reflection.Assembly>();
+			//// 1. Scan for assemblies containing dlls that implement IMazeIntegration in the bin folder
+			//var assemblies =
+			//	new System.Collections.Generic.List<System.Reflection.Assembly>();
 
-			assemblies.AddRange(
-				System.IO.Directory.EnumerateFiles
-				(System.IO.Directory.GetCurrentDirectory(), "*.dll", System.IO.SearchOption.AllDirectories)
-				.Select(System.Reflection.Assembly.LoadFrom)
-			);
+			//assemblies.AddRange(
+			//	System.IO.Directory.EnumerateFiles
+			//	(System.IO.Directory.GetCurrentDirectory(), "*.dll", System.IO.SearchOption.AllDirectories)
+			//	.Select(System.Reflection.Assembly.LoadFrom)
+			//);
 
-			//TODO
-			// Fix to handle multiple implementations/Load one implementation
-			foreach (var assembly in assemblies)
+			////TODO
+			//// Fix to handle multiple implementations/Load one implementation
+			//foreach (var assembly in assemblies)
+			//{
+			//	builder.RegisterAssemblyTypes(assembly)
+			//		.Where(t => t.GetInterfaces()
+			//			.Any(i => i.IsAssignableFrom(typeof(Integration.Maze.IMazeIntegration))))
+			//		.AsImplementedInterfaces()
+			//		.InstancePerRequest();
+			//}
+
+			try
 			{
-				builder.RegisterAssemblyTypes(assembly)
-					.Where(t => t.GetInterfaces()
-						.Any(i => i.IsAssignableFrom(typeof(Integration.Maze.IMazeIntegration))))
-					.AsImplementedInterfaces()
-					.InstancePerRequest();
+				string path =
+					System.AppDomain.CurrentDomain.BaseDirectory;
+
+				string pathName =
+					$"{ path }SahelMazeGame.dll";
+
+				if (System.IO.File.Exists(pathName))
+				{
+					System.Reflection.Assembly assembly =
+						System.Reflection.Assembly.LoadFile(path: pathName);
+
+					//builder.RegisterAssemblyTypes(assembly)
+					//.AsImplementedInterfaces()
+					//.InstancePerRequest();
+
+					builder.RegisterAssemblyTypes(assembly)
+					.AsImplementedInterfaces();
+				}
+			}
+			catch (System.Exception ex)
+			{
+				System.Console.WriteLine(ex.Message);
 			}
 
 			builder.RegisterType<ASCIIConsole>().As<Integration.Maze.IEmulator>();
